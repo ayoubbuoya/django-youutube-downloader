@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="hero">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-title-line"></span>
+                <span class="section-title-text">YOUTUBE DOWNLOADER</span>
+                <span class="section-title-line"></span>
+            </h2>
+            <form method="POST" action="{% url 'home' %}" class="youtube-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="url" name="url" id="url" class="youtube-input" placeholder="Enter YouTube URL" required>
+                </div>
+                <button type="submit" class="btn btn-download">Download</button>
+            </form>
+        </div>
+        <div class="streams">
+        {% if streams %}
+        <ul>
+            {% for stream in streams %}
+            <li>
+                <a href="{{ stream.url }}"><button class="btn btn-download">{{ stream.resolution }}</button></a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </section>
+{% endblock %}
+
